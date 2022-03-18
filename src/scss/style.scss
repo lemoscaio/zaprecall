@@ -1,0 +1,275 @@
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+
+// colors
+
+$background-color: #fb6b6b;
+$button-background-color: #ffffff;
+$card-background-color: #ffffd4;
+
+$light-text-color: #ffffff;
+$alternate-text-color: #d70900;
+$border-color: #d70900;
+$dark-text-color: #333333;
+
+$wrong-color: #ff3030;
+$almost-wrong-color: #ff922e;
+$right-color: #2fbe34;
+
+// patterns
+
+%default-font {
+    font-family: "Roboto", sans-serif;
+    color: white;
+}
+
+%default-border-radius {
+    border-radius: 5px;
+}
+
+%default-button-shadow {
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+%footer-shaddow {
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+%card-answered {
+    font-weight: 700 !important;
+    text-decoration: line-through !important;
+    text-decoration-thickness: 2px !important;
+}
+
+// mixins
+
+@mixin desktop-only {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile-only {
+    @media (max-width: 767px) {
+        @content;
+    }
+}
+
+// general rules
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    @extend %default-font;
+    background-color: $background-color;
+}
+
+// utilitaries
+
+.u-wrong {
+    color: $wrong-color !important;
+    @extend %card-answered;
+}
+.u-almost-wrong {
+    color: $almost-wrong-color !important;
+    @extend %card-answered;
+}
+.u-right {
+    color: $right-color !important;
+    @extend %card-answered;
+}
+
+// header
+
+.o-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+
+    &__icon {
+        width: 50px;
+        margin-right: 10px;
+    }
+
+    &__title {
+        font-size: 35px;
+    }
+}
+
+//main
+
+.o-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    .c-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        width: 90vw;
+        min-height: 60px;
+        margin: 10px 0;
+        padding: 10px 15px;
+
+        background-color: $button-background-color;
+
+        color: $dark-text-color;
+        font-size: 18px;
+        font-weight: 700;
+
+        @extend %default-border-radius, %default-button-shadow;
+
+        &.is-opened {
+            min-height: 130px;
+
+            & .c-card__face {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                background-color: $card-background-color;
+                width: 100%;
+                height: 100%;
+
+                padding: 20px 15px;
+
+                font-weight: 400;
+
+                @extend %default-border-radius;
+
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+
+                // TODO change deg to invert card
+                &--front {
+                    transform: rotateX(180deg);
+                }
+                // TODO change deg to invert card
+                &--back {
+                    transform: rotateY(0deg);
+                }
+            }
+            // TODO change hover to something else
+            &:hover .c-card__face--front {
+                transform: rotateX(180deg);
+            }
+            // TODO change hover to something else
+            &:hover .c-card__face--back {
+                transform: rotateX(0deg);
+            }
+        }
+
+        &__icon {
+            font-size: 30px;
+        }
+
+        &__turn-icon {
+            height: 20px;
+
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+        }
+
+        &__buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 10px 5px;
+        }
+
+        &__button {
+            flex-grow: 1;
+
+            @extend %default-font;
+
+            padding: 10px;
+            margin: 0 5px;
+
+            cursor: pointer;
+
+            @extend %default-border-radius;
+            border: none;
+
+            &--wrong {
+                background-color: $wrong-color;
+            }
+            &--almost-wrong {
+                background-color: $almost-wrong-color;
+            }
+            &--right {
+                background-color: $right-color;
+            }
+        }
+    }
+}
+
+//footer
+
+.o-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    // height: 90px;
+
+    background-color: white;
+    color: $dark-text-color;
+    font-size: 20px;
+
+    @extend %footer-shaddow;
+
+    &__title {
+        display: flex;
+        align-items: center;
+
+        margin: 10px 0 5px;
+
+        font-weight: 700;
+    }
+
+    &__title-icon {
+        height: 25px;
+        width: 25px;
+
+        margin-right: 10px;
+    }
+
+    &__main-message {
+        width: 70%;
+        text-align: center;
+
+        margin: 10px 0 15px;
+    }
+
+    &__card-counter {
+        margin: 5px;
+    }
+
+    &__icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 25px;
+    }
+}
