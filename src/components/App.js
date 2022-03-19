@@ -1,13 +1,22 @@
-import Header from "./Header.js";
+import React from 'react';
+
+import Home from "./Home.js";
 import Main from "./Main.js";
-import Footer from "./Footer.js";
 
 export default function App() {
-    return (
+
+    const [homeScreen, setHomeScreen] = React.useState(false)
+
+    // TODO add ! on homeScreen to revert logic
+    return homeScreen ? (
         <>
-        <Header />
-        <Main />
-        <Footer />
+            <Home homeScreen={homeScreen} setHomeScreen={setHomeScreen} />
         </>
-        )
+    ) : (
+        <>
+            <Main />
+        </>
+    )
+
+
 }

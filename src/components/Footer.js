@@ -2,7 +2,7 @@ export default function Footer() {
     return (
         <footer className="o-footer">
             <div className="o-footer__title">
-                <img className="o-footer__title-icon" src="./assets/images/sad.png" alt="" srcset="" />
+                <img className="o-footer__title-icon" src="./assets/images/sad.png" alt="" />
                 <p className="o-footer__title-text">
                     PARABÉNS!
                 </p>
