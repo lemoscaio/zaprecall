@@ -1,4 +1,6 @@
-export default function Footer({ questions, totalAnswered }) {
+export default function Footer(props) {
+    const { questions, totalAnswered, statusList } = props
+    console.log(statusList)
 
     return (
         <footer className="o-footer">
@@ -7,23 +9,25 @@ export default function Footer({ questions, totalAnswered }) {
                 {totalAnswered}/{questions.length} CONCLUÍDOS
             </p>
 
+            {/* TODO CHANGE "u-" to better logic understanding */}
+
             <div className="o-footer__icons">
-                {questions.map((question) => {
-                    if (question.status === "wrong") {
+                {statusList.map((item) => {
+                    if (item === "u-wrong") {
                         return (
                             <span className="o-footer__icon u-wrong">
                                 <ion-icon name="close-circle"></ion-icon>
                             </span>
                         )
                     }
-                    else if (question.status === "almost wrong") {
+                    else if (item === "u-almost-wrong") {
                         return (
                             <span className="o-footer__icon u-almost-wrong">
                                 <ion-icon name="help-circle"></ion-icon>
                             </span>
                         )
                     }
-                    else if (question.status === "right") {
+                    else if (item === "u-right") {
                         return (
                             <span className="o-footer__icon u-right">
                                 <ion-icon name="checkmark-circle"></ion-icon>

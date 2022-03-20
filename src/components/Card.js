@@ -1,22 +1,29 @@
 import React from 'react';
 
-export default function Card({ question: { question, answer }, index, setTotalAnswered }) {
-    // export default function Card({ question, index }) {
+export default function Card(props) {
+    const { question: { question, answer }, index, setTotalAnswered, setStatusList } = props
+
     const [isOpened, setIsOpened] = React.useState(false)
     const [isTurned, setIsTurned] = React.useState(false)
     const [status, setStatus] = React.useState(null)
 
+
     const isOpenedCSS = isOpened ? "is-opened" : ""
     const isTurnedCSS = isTurned ? "turned" : ""
 
-    const storedStatus = []
 
+
+    // TODO make some way to close the card wihtout needing to answer again
     // TODO disable buttons after answering
     // TODO change "u-" on status to simplify logic
 
-    function setAndStoreStatus(status) {
+    function setAndStoreStatus(event, status) {
+        setTotalAnswered()
         setStatus(status)
-        storedStatus.push(status)
+        setStatusList(status)
+        setIsOpened(false)
+        setIsTurned(false)
+        event.stopPropagation()
     }
 
     const frontFaceContent = !isOpened ?
@@ -43,25 +50,13 @@ export default function Card({ question: { question, answer }, index, setTotalAn
             </h2>
             <div className="c-card__buttons">
                 <button onClick={(event) => {
-                    setAndStoreStatus("u-wrong")
-                    setIsOpened(false)
-                    setIsTurned(false)
-                    setTotalAnswered()
-                    event.stopPropagation()
+                    setAndStoreStatus(event, "u-wrong")
                 }} className=" c-card__button c-card__button--wrong">Não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus("u-almost-wrong")
-                    setIsOpened(false)
-                    setIsTurned(false)
-                    setTotalAnswered()
-                    event.stopPropagation()
+                    setAndStoreStatus(event, "u-almost-wrong")
                 }} className=" c-card__button c-card__button--almost-wrong">Quase não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus("u-right")
-                    setIsOpened(false)
-                    setIsTurned(false)
-                    setTotalAnswered()
-                    event.stopPropagation()
+                    setAndStoreStatus(event, "u-right")
                 }} className=" c-card__button c-card__button--right">Zap!</button>
             </div>
         </> : ""

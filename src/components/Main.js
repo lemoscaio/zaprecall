@@ -56,13 +56,23 @@ const questions = [
 ]
 
 export default function Main() {
-    const [totalAnswered, settotalAnswered] = React.useState(0)
+
+    const [totalAnswered, setTotalAnswered] = React.useState(0)
+    const [statusList, setStatusList] = React.useState([])
 
     return (
         <>
             <Header />
-            <Cards questions={questions} setTotalAnswered={() => settotalAnswered(totalAnswered + 1)}/>
-            <Footer questions={questions} totalAnswered={totalAnswered}/>
+            <Cards
+                questions={questions}
+                setTotalAnswered={() => setTotalAnswered(totalAnswered + 1)}
+                setStatusList={(status) => setStatusList([...statusList, status])}
+            />
+            <Footer
+                questions={questions}
+                totalAnswered={totalAnswered}
+                statusList={statusList}
+            />
         </>
     )
 }

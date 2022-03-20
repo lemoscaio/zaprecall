@@ -205,21 +205,18 @@ body {
                 transform-style: preserve-3d;
                 backface-visibility: hidden;
 
-                // TODO change deg to invert card
                 &--front {
                     transform: rotateX(0deg);
                 }
-                // TODO change deg to invert card
+
                 &--back {
                     transform: rotateY(180deg);
                 }
             }
-            // TODO change hover to something else
             &.turned .c-card__face--front {
                 transform: rotateX(180deg);
             }
-            // TODO change hover to something else
-            &.turned .c-card__face--back  {
+            &.turned .c-card__face--back {
                 transform: rotateX(0deg);
             }
         }
