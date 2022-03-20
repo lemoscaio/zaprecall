@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default function Card({ question: { question, answer }, index }) {
+export default function Card({ question: { question, answer }, index, setTotalAnswered }) {
+    // export default function Card({ question, index }) {
     const [isOpened, setIsOpened] = React.useState(false)
     const [isTurned, setIsTurned] = React.useState(false)
 
     const isOpenedCSS = isOpened ? "is-opened" : ""
-    const isTurnedCSS = isTurned ? "turned" : ""
+    const isTurnedCSS = isTurned ? "turned" : "" 
 
     const frontFaceContent = !isOpened ?
         <>
@@ -20,7 +21,7 @@ export default function Card({ question: { question, answer }, index }) {
             <h2 className="c-card__question">
                 {question}
             </h2>
-            <img onClick={() => {setIsTurned(true)}} className="c-card__turn-icon" src="./assets/images/turn-arrow.png" alt="Seta em 360 graus" />
+            <img onClick={() => { setIsTurned(true) }} className="c-card__turn-icon" src="./assets/images/turn-arrow.png" alt="Seta em 360 graus" />
         </>
 
     const backFaceContent = isTurned ?
@@ -30,9 +31,18 @@ export default function Card({ question: { question, answer }, index }) {
                 {answer}
             </h2>
             <div className="c-card__buttons">
-                <button className=" c-card__button c-card__button--wrong">Não lembrei</button>
-                <button className=" c-card__button c-card__button--almost-wrong">Quase não lembrei</button>
-                <button className=" c-card__button c-card__button--right">Zap!</button>
+                <button onClick={() => {
+                    // callback("wrong")
+                    setTotalAnswered()
+                }} className=" c-card__button c-card__button--wrong">Não lembrei</button>
+                <button onClick={() => {
+                    // callback("almost wrong")
+                    setTotalAnswered()
+                }} className=" c-card__button c-card__button--almost-wrong">Quase não lembrei</button>
+                <button onClick={() => {
+                    // callback("right")
+                    setTotalAnswered()
+                }} className=" c-card__button c-card__button--right">Zap!</button>
             </div>
         </> : ""
 
