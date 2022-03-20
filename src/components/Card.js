@@ -4,9 +4,20 @@ export default function Card({ question: { question, answer }, index, setTotalAn
     // export default function Card({ question, index }) {
     const [isOpened, setIsOpened] = React.useState(false)
     const [isTurned, setIsTurned] = React.useState(false)
+    const [status, setStatus] = React.useState(null)
 
     const isOpenedCSS = isOpened ? "is-opened" : ""
-    const isTurnedCSS = isTurned ? "turned" : "" 
+    const isTurnedCSS = isTurned ? "turned" : ""
+
+    const storedStatus = []
+
+    // TODO disable buttons after answering
+    // TODO change "u-" on status to simplify logic
+
+    function setAndStoreStatus(status) {
+        setStatus(status)
+        storedStatus.push(status)
+    }
 
     const frontFaceContent = !isOpened ?
         <>
@@ -31,24 +42,33 @@ export default function Card({ question: { question, answer }, index, setTotalAn
                 {answer}
             </h2>
             <div className="c-card__buttons">
-                <button onClick={() => {
-                    // callback("wrong")
+                <button onClick={(event) => {
+                    setAndStoreStatus("u-wrong")
+                    setIsOpened(false)
+                    setIsTurned(false)
                     setTotalAnswered()
+                    event.stopPropagation()
                 }} className=" c-card__button c-card__button--wrong">Não lembrei</button>
-                <button onClick={() => {
-                    // callback("almost wrong")
+                <button onClick={(event) => {
+                    setAndStoreStatus("u-almost-wrong")
+                    setIsOpened(false)
+                    setIsTurned(false)
                     setTotalAnswered()
+                    event.stopPropagation()
                 }} className=" c-card__button c-card__button--almost-wrong">Quase não lembrei</button>
-                <button onClick={() => {
-                    // callback("right")
+                <button onClick={(event) => {
+                    setAndStoreStatus("u-right")
+                    setIsOpened(false)
+                    setIsTurned(false)
                     setTotalAnswered()
+                    event.stopPropagation()
                 }} className=" c-card__button c-card__button--right">Zap!</button>
             </div>
         </> : ""
 
     return (
         <li className="c-card-list__item">
-            <article onClick={() => setIsOpened(true)} className={`c-card-list__card c-card ${isOpenedCSS} ${isTurnedCSS}`}>
+            <article onClick={() => setIsOpened(true)} className={`c-card-list__card c-card ${isOpenedCSS} ${isTurnedCSS} ${status}`}>
                 <div className="c-card__face c-card__face--front">
                     {frontFaceContent}
                 </div>
