@@ -56,7 +56,7 @@ const questions = [
     }
 ]
 
-export default function Main() {
+export default function Main({ images }) {
 
     const [totalAnswered, setTotalAnswered] = React.useState(0)
     const [statusList, setStatusList] = React.useState([])
@@ -65,16 +65,20 @@ export default function Main() {
 
     return (
         <>
-            <Header />
+            <Header
+                images={images}
+            />
             <Cards
                 questions={shuffledQuestions}
                 setTotalAnswered={() => setTotalAnswered(totalAnswered + 1)}
                 setStatusList={(status) => setStatusList([...statusList, status])}
+                images={images}
             />
             <Footer
                 questions={shuffledQuestions}
                 totalAnswered={totalAnswered}
                 statusList={statusList}
+                images={images}
             />
         </>
     )

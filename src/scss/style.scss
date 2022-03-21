@@ -69,6 +69,10 @@ body {
     @extend %card-answered;
 }
 
+.is-disabled {
+    pointer-events: none;
+}
+
 // home
 
 .home {

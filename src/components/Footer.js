@@ -1,7 +1,7 @@
 export default function Footer(props) {
-    const { questions, totalAnswered, statusList } = props
-    console.log(statusList)
+    const { questions, totalAnswered, statusList, images } = props
 
+    // TODO last thing to do: try to remove map by removing function 
     const iconsDiv = <>
         <div className="footer__icons">
             {statusList.map((item) => {
@@ -31,7 +31,7 @@ export default function Footer(props) {
 
     const finalMessage = statusList.includes("wrong") ? <>
         <div className="footer__title">
-            <img className="footer__title-icon" src="./assets/images/sad.png" alt="" />
+            <img className="footer__title-icon" src={images.sad} alt="" />
             <p className="footer__title-text">
                 Putz...
             </p>
@@ -51,8 +51,6 @@ export default function Footer(props) {
         </p>
     </>
 
-
-    // TODO CHANGE "u-" from statusList to better logic understanding
 
     return (
         <footer className="footer">

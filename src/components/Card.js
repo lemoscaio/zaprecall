@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 export default function Card(props) {
-    const { question: { question, answer }, index, setTotalAnswered, setStatusList } = props
+    const { question: { question, answer }, index, setTotalAnswered, setStatusList, images } = props
 
     const [isOpened, setIsOpened] = React.useState(false)
     const [isTurned, setIsTurned] = React.useState(false)
@@ -10,22 +10,22 @@ export default function Card(props) {
 
     const isOpenedCSS = isOpened ? "is-opened" : ""
     const isTurnedCSS = isTurned ? "turned" : ""
+    const disabledCSS = status ? "is-disabled" : ""
 
     let statusIcon
-    if (!status) {
-        statusIcon = "play-outline"
-    } else if (status === "wrong") {
-        statusIcon = "close-circle"
-    } else if (status === "almost-wrong") {
-        statusIcon = "help-circle"
-    } else if (status === "right") {
-        statusIcon = "checkmark-circle"
+    switch (status) {
+        case "wrong":
+            statusIcon = "close-circle"
+            break
+        case "almost-wrong":
+            statusIcon = "help-circle"
+            break
+        case "right":
+            statusIcon = "checkmark-circle"
+            break
+        default:
+            statusIcon = "play-outline"
     }
-
-
-    // TODO make some way to close the card wihtout needing to answer again
-    // TODO disable buttons after answering
-    // TODO change "u-" on status to simplify logic
 
     function setAndStoreStatus(event, status) {
         setTotalAnswered()
@@ -49,7 +49,7 @@ export default function Card(props) {
             <h2 className="card__question">
                 {question}
             </h2>
-            <img onClick={() => { setIsTurned(true) }} className="card__turn-icon" src="./assets/images/turn-arrow.png" alt="Seta em 360 graus" />
+            <img onClick={() => { setIsTurned(true) }} className="card__turn-icon" src={images.turnIcon} alt="Seta em 360 graus" />
         </>
 
     const backFaceContent = isTurned ?
@@ -72,7 +72,7 @@ export default function Card(props) {
         </> : ""
 
     return (
-        <article onClick={() => setIsOpened(true)} className={`cards__card card ${isOpenedCSS} ${isTurnedCSS}`}>
+        <article onClick={() => setIsOpened(true)} className={`cards__card card ${isOpenedCSS} ${isTurnedCSS} ${disabledCSS}`}>
             <div className="card__face card__face--front">
                 {frontFaceContent}
             </div>
