@@ -7,9 +7,7 @@ export default function App({images}) {
 
     const [homeScreen, setHomeScreen] = React.useState(false)
 
-    // TODO uncomment line to revert logic before deploy
     return !homeScreen ? (
-    // return homeScreen ? (
         <>
             <Home homeScreen={homeScreen} setHomeScreen={setHomeScreen} images={images} />
         </>

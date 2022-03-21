@@ -18,7 +18,6 @@ export default function Footer(props) {
         })
     }, [questions])
 
-    // TODO last thing to do: try to remove map by removing function REMOVE html from here and put only the name of the icon
     const iconsDiv = <>
         <div className="footer__icons">
             {statusList.map((item, index) => {
