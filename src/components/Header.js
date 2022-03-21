@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Header({ images, checkScroll, scrollClassCSS }) {
+export default function Header({ images, scrollClassCSS }) {
 
     return (
         <header className={`header ${scrollClassCSS[0]}`}>
