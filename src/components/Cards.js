@@ -1,9 +1,9 @@
 import Card from "./Card.js";
 
-export default function Cards({ questions, setQuestions, setStatusList, images }) {
+export default function Cards({ questions, setQuestions, setStatusList, images, checkScroll }) {
     return (
-        <main className="main">
-            <div className="main__cards cards">
+        <main className="main" onScroll={checkScroll}>
+            <div className="main__cards cards" onScroll={checkScroll}>
                 {questions.map((question, index) => {
                     return <Card
                         key={index}

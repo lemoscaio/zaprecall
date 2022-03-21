@@ -145,8 +145,12 @@ button {
 
 // header
 
+.header.active {
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);   
+}
+
 .header {
-    position: fixed;
+    position: sticky;
     width: 100%;
     z-index: 1;
 

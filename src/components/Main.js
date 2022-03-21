@@ -6,7 +6,7 @@ import Footer from "./Footer.js"
 
 import questionsJSON from "./questions.json"
 
-export default function Main({ homeScreen, setHomeScreen, images }) {
+export default function Main({ homeScreen, setHomeScreen, images, checkScroll }) {
     const [questions, setQuestions] = React.useState([...questionsJSON])
     const [initialQuestionsState, setInitialQuestionsState] = React.useState([])
     const [statusList, setStatusList] = React.useState([])
@@ -17,12 +17,22 @@ export default function Main({ homeScreen, setHomeScreen, images }) {
         setInitialQuestionsState([...shuffledQuestions])
     }, [])
 
+    const [scrollClassCSS, setscrollClassCSS] = React.useState([""])
+
+    function checkScroll() {
+        const headerEl = document.querySelector(".main")
+        return headerEl.scrollTop > 0 ? setscrollClassCSS(["active"]) : setscrollClassCSS([""])
+    }
+
     return (
         <>
             <Header
                 images={images}
+                checkScroll={checkScroll}
+                scrollClassCSS={scrollClassCSS}
             />
             <Cards
+                checkScroll={checkScroll}
                 questions={questions}
                 setQuestions={setQuestions}
                 setStatusList={(status) => setStatusList([...statusList, status])}
