@@ -1,12 +1,10 @@
 import React from 'react'
 
 export default function Card(props) {
-    const { question: { question, answer }, index, setTotalAnswered, setStatusList, images } = props
+    const { question: { question, answer, id, status }, questions, setQuestions, index, setStatusList, images } = props
 
     const [isOpened, setIsOpened] = React.useState(false)
     const [isTurned, setIsTurned] = React.useState(false)
-    const [status, setStatus] = React.useState(null)
-
 
     const isOpenedCSS = isOpened ? "is-opened" : ""
     const isTurnedCSS = isTurned ? "turned" : ""
@@ -27,9 +25,11 @@ export default function Card(props) {
             statusIcon = "play-outline"
     }
 
-    function setAndStoreStatus(event, status) {
-        setTotalAnswered()
-        setStatus(status)
+    function setAndStoreStatus(event, id, status) {
+        const newQuestions = questions.map((question) => {
+            return question.id === id ? { ...question, answered: true, status: status } : question
+        })
+        setQuestions(newQuestions)
         setStatusList(status)
         setIsOpened(false)
         setIsTurned(false)
@@ -60,13 +60,13 @@ export default function Card(props) {
             </h2>
             <div className="card__buttons">
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "wrong")
+                    setAndStoreStatus(event, id, "wrong")
                 }} className=" card__button card__button--wrong">Não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "almost-wrong")
+                    setAndStoreStatus(event, id, "almost-wrong")
                 }} className=" card__button card__button--almost-wrong">Quase não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "right")
+                    setAndStoreStatus(event, id, "right")
                 }} className=" card__button card__button--right">Zap!</button>
             </div>
         </> : ""

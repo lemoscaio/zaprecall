@@ -1,13 +1,27 @@
 // TODO correct font
 
 // fonts
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Recursive:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import "variables";
+
+// mixins
+
+@mixin desktop-only {
+    @media (min-width: 768) {
+        @content;
+    }
+}
 
 // patterns
 
+%title-font {
+    font-family: "Righteous", sans-serif;
+    color: white;
+}
+
 %default-font {
-    font-family: "Roboto", sans-serif;
+    font-family: "recursive", sans-serif;
     color: white;
 }
 
@@ -90,9 +104,10 @@ body {
     align-items: center;
 
     &__title {
-        @extend %default-font;
+        @extend %title-font;
         font-size: 36px;
         font-weight: 700;
+        letter-spacing: 1px;
 
         margin: 10px 0;
     }
@@ -123,10 +138,16 @@ body {
 // header
 
 .header {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
+
+    background-color: $background-color;
 
     &__icon {
         width: 50px;
@@ -141,17 +162,43 @@ body {
 //main
 
 .main {
-    height: 100%;
+    position: fixed;
+    top: 100px;
+    bottom: 80px;
+    // height: calc(100vh - 80px);
+    overflow-y: auto;
+
+    width: 100%;
+
+    // margin-bottom: 80px;
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: $light-text-color;
+    }
 }
 
 .cards {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 
     width: 100%;
     height: 100%;
+
+    padding-bottom: 40px;
 
     .card {
         display: flex;
@@ -160,6 +207,9 @@ body {
         position: relative;
 
         width: 90%;
+        @include desktop-only {
+            width: 500px;
+        }
         min-height: 60px;
         margin: 10px 0;
         padding: 10px 15px;
@@ -207,19 +257,23 @@ body {
                 transform-style: preserve-3d;
                 backface-visibility: hidden;
 
-                &--front {
-                    transform: rotateY(0deg);
-                }
+                // &--front {
+                //     transform: rotateY(0deg);
+                //     -webkit-transform: rotateY(0deg);
+                // }
 
                 &--back {
                     transform: rotateY(180deg);
+                    -webkit-transform: rotateY(180deg);
                 }
             }
             &.turned .card__face--front {
-                transform: rotateY(180deg);
+                transform: rotateY(-180deg);
+                -webkit-transform: rotateY(-180deg);
             }
             &.turned .card__face--back {
-                transform: rotateY(0deg);
+                transform: rotateY(360deg);
+                -webkit-transform: rotateY(360deg);
             }
         }
 
@@ -286,7 +340,7 @@ body {
     bottom: 0;
     width: 100%;
     padding: 10px;
-    min-height: 60px;
+    min-height: 80px;
 
     background-color: white;
     color: $dark-text-color;
@@ -329,5 +383,20 @@ body {
         align-items: center;
 
         font-size: 25px;
+    }
+
+    &__reset-button {
+        background-color: $background-color;
+
+        color: $light-text-color;
+        font-size: 16px;
+
+        padding: 10px 35px;
+        margin: 10px;
+
+        border: none;
+        @extend %default-border-radius;
+
+        cursor: pointer;
     }
 }

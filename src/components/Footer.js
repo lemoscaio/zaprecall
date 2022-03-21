@@ -1,31 +1,50 @@
-export default function Footer(props) {
-    const { questions, totalAnswered, statusList, images } = props
+import React from 'react'
 
-    // TODO last thing to do: try to remove map by removing function 
+export default function Footer(props) {
+    const { questions, setQuestions, initialQuestionsState, statusList, setStatusList, homeScreen, setHomeScreen, images } = props
+
+    const [totalAnswered, setTotalAnswered] = React.useState(0)
+
+    function resetStates() {
+        setQuestions([...initialQuestionsState])
+        setTotalAnswered(0)
+        setStatusList([])
+        setHomeScreen(!homeScreen)
+    }
+
+    React.useEffect(() => {
+        questions.forEach((question) => {
+            if (question.answered) setTotalAnswered(totalAnswered + 1)
+        })
+    }, [questions])
+
+    // TODO last thing to do: try to remove map by removing function REMOVE html from here and put only the name of the icon
     const iconsDiv = <>
         <div className="footer__icons">
-            {statusList.map((item) => {
+            {statusList.map((item, index) => {
+                let statusIcon
                 if (item === "wrong") {
-                    return (
-                        <span className="footer__icon wrong">
+                    statusIcon = (
+                        <span key={index} className="footer__icon wrong">
                             <ion-icon name="close-circle"></ion-icon>
                         </span>
                     )
                 }
                 else if (item === "almost-wrong") {
-                    return (
-                        <span className="footer__icon almost-wrong">
+                    statusIcon = (
+                        <span key={index} className="footer__icon almost-wrong">
                             <ion-icon name="help-circle"></ion-icon>
                         </span>
                     )
                 }
                 else if (item === "right") {
-                    return (
-                        <span className="footer__icon right">
+                    statusIcon = (
+                        <span key={index} className="footer__icon right">
                             <ion-icon name="checkmark-circle"></ion-icon>
                         </span>
                     )
                 }
+                return statusIcon
             })}
         </div></>
 
@@ -41,7 +60,7 @@ export default function Footer(props) {
         </p>
     </> : <>
         <div className="footer__title">
-            <img className="footer__title-icon" src="./assets/images/party.png" alt="" />
+            <img className="footer__title-icon" src={images.party} alt="" />
             <p className="footer__title-text">
                 PARABÉNS!
             </p>
@@ -49,6 +68,10 @@ export default function Footer(props) {
         <p className="footer__main-message">
             Você não esqueceu de nenhum flashcard!
         </p>
+    </>
+
+    const resetButton = <>
+        <button onClick={() => resetStates()} type="button" className="footer__reset-button">REINICIAR RECALL</button>
     </>
 
 
@@ -62,6 +85,8 @@ export default function Footer(props) {
             </p>
 
             {iconsDiv}
+
+            {totalAnswered === questions.length && resetButton}
 
         </footer>
     )

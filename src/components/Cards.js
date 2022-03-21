@@ -1,6 +1,6 @@
 import Card from "./Card.js";
 
-export default function Cards({ questions, setTotalAnswered, setStatusList, images }) {
+export default function Cards({ questions, setQuestions, setStatusList, images }) {
     return (
         <main className="main">
             <div className="main__cards cards">
@@ -8,8 +8,9 @@ export default function Cards({ questions, setTotalAnswered, setStatusList, imag
                     return <Card
                         key={index}
                         question={question}
+                        questions={questions}
+                        setQuestions={setQuestions}
                         index={index}
-                        setTotalAnswered={setTotalAnswered}
                         setStatusList={setStatusList}
                         images={images}
                     />
