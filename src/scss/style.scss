@@ -1,3 +1,5 @@
+// TODO correct font
+
 // fonts
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
 @import "variables";
@@ -135,6 +137,10 @@ body {
 //main
 
 .main {
+    height: 100%;
+}
+
+.cards {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,18 +155,14 @@ body {
         align-items: center;
         position: relative;
 
-        width: 90vw;
+        width: 90%;
         min-height: 60px;
         margin: 10px 0;
         padding: 10px 15px;
 
-        background-color: $button-background-color;
+        cursor: pointer;
 
-        color: $dark-text-color;
-        font-size: 18px;
-        font-weight: 700;
-
-        @extend %default-border-radius, %default-button-shadow;
+        transition: all 0.5s;
 
         &__face {
             position: absolute;
@@ -168,8 +170,20 @@ body {
             justify-content: space-between;
             align-items: center;
             left: 0;
+            height: 100%;
             width: 100%;
             padding: 20px 15px;
+            font-size: 18px;
+            font-weight: 700;
+
+            color: $dark-text-color;
+
+            transition: transform 0.5s;
+
+            &--front {
+                background-color: $button-background-color;
+                @extend %default-border-radius, %default-button-shadow;
+            }
         }
 
         &.is-opened {
@@ -179,10 +193,10 @@ body {
                 align-items: flex-start;
 
                 background-color: $card-background-color;
-                width: 100%;
-                height: 100%;
 
                 font-weight: 400;
+
+                cursor: auto;
 
                 @extend %default-border-radius;
 
@@ -190,7 +204,7 @@ body {
                 backface-visibility: hidden;
 
                 &--front {
-                    transform: rotateX(0deg);
+                    transform: rotateY(0deg);
                 }
 
                 &--back {
@@ -198,10 +212,10 @@ body {
                 }
             }
             &.turned .card__face--front {
-                transform: rotateX(180deg);
+                transform: rotateY(180deg);
             }
             &.turned .card__face--back {
-                transform: rotateX(0deg);
+                transform: rotateY(0deg);
             }
         }
 
@@ -215,6 +229,8 @@ body {
             position: absolute;
             bottom: 10px;
             right: 15px;
+
+            cursor: pointer;
         }
 
         &__buttons {
@@ -266,13 +282,15 @@ body {
     bottom: 0;
     width: 100%;
     padding: 10px;
-    // height: 90px;
+    min-height: 60px;
 
     background-color: white;
     color: $dark-text-color;
     font-size: 20px;
 
     @extend %footer-shaddow;
+
+    transition: transform 4s;
 
     &__title {
         display: flex;

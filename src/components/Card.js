@@ -38,10 +38,10 @@ export default function Card(props) {
 
     const frontFaceContent = !isOpened ?
         <>
-            <p className="card__number">
+            <p className={`card__number ${status}`}>
                 Pergunta {index + 1}
             </p >
-            <span className="card__icon">
+            <span className={`card__icon ${status}`}>
                 <ion-icon name={statusIcon}></ion-icon>
             </span>
         </> :
@@ -72,7 +72,7 @@ export default function Card(props) {
         </> : ""
 
     return (
-        <article onClick={() => setIsOpened(true)} className={`cards__card card ${isOpenedCSS} ${isTurnedCSS} ${status}`}>
+        <article onClick={() => setIsOpened(true)} className={`cards__card card ${isOpenedCSS} ${isTurnedCSS}`}>
             <div className="card__face card__face--front">
                 {frontFaceContent}
             </div>
