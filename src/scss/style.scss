@@ -1,20 +1,6 @@
 // fonts
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
-
-// colors
-
-$background-color: #fb6b6b;
-$button-background-color: #ffffff;
-$card-background-color: #ffffd4;
-
-$light-text-color: #ffffff;
-$alternate-text-color: #d70900;
-$border-color: #d70900;
-$dark-text-color: #333333;
-
-$wrong-color: #ff3030;
-$almost-wrong-color: #ff922e;
-$right-color: #2fbe34;
+@import "variables";
 
 // patterns
 
@@ -37,8 +23,8 @@ $right-color: #2fbe34;
 
 %card-answered {
     font-weight: 700 !important;
-    text-decoration: line-through !important;
     text-decoration-thickness: 2px !important;
+    text-decoration: line-through !important;
 }
 
 // mixins
@@ -68,22 +54,22 @@ body {
 
 // utilitaries
 
-.u-wrong {
+.wrong {
     color: $wrong-color !important;
     @extend %card-answered;
 }
-.u-almost-wrong {
+.almost-wrong {
     color: $almost-wrong-color !important;
     @extend %card-answered;
 }
-.u-right {
+.right {
     color: $right-color !important;
     @extend %card-answered;
 }
 
 // home
 
-.o-home {
+.home {
     position: fixed;
     top: 0;
     left: 0;
@@ -130,7 +116,7 @@ body {
 
 // header
 
-.o-header {
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,7 +134,7 @@ body {
 
 //main
 
-.o-main {
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,7 +143,7 @@ body {
     width: 100%;
     height: 100%;
 
-    .c-card {
+    .card {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -177,26 +163,24 @@ body {
         @extend %default-border-radius, %default-button-shadow;
 
         &__face {
+            position: absolute;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
+            left: 0;
             width: 100%;
+            padding: 20px 15px;
         }
 
         &.is-opened {
             min-height: 130px;
 
-            & .c-card__face {
-                position: absolute;
-                top: 0;
-                left: 0;
+            & .card__face {
+                align-items: flex-start;
 
                 background-color: $card-background-color;
                 width: 100%;
                 height: 100%;
-
-                padding: 20px 15px;
 
                 font-weight: 400;
 
@@ -213,10 +197,10 @@ body {
                     transform: rotateY(180deg);
                 }
             }
-            &.turned .c-card__face--front {
+            &.turned .card__face--front {
                 transform: rotateX(180deg);
             }
-            &.turned .c-card__face--back {
+            &.turned .card__face--back {
                 transform: rotateX(0deg);
             }
         }
@@ -272,7 +256,7 @@ body {
 
 //footer
 
-.o-footer {
+.footer {
     display: flex;
     justify-content: center;
     align-items: center;

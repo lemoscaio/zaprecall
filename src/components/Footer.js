@@ -3,25 +3,25 @@ export default function Footer(props) {
     console.log(statusList)
 
     const iconsDiv = <>
-        <div className="o-footer__icons">
+        <div className="footer__icons">
             {statusList.map((item) => {
-                if (item === "u-wrong") {
+                if (item === "wrong") {
                     return (
-                        <span className="o-footer__icon u-wrong">
+                        <span className="footer__icon wrong">
                             <ion-icon name="close-circle"></ion-icon>
                         </span>
                     )
                 }
-                else if (item === "u-almost-wrong") {
+                else if (item === "almost-wrong") {
                     return (
-                        <span className="o-footer__icon u-almost-wrong">
+                        <span className="footer__icon almost-wrong">
                             <ion-icon name="help-circle"></ion-icon>
                         </span>
                     )
                 }
-                else if (item === "u-right") {
+                else if (item === "right") {
                     return (
-                        <span className="o-footer__icon u-right">
+                        <span className="footer__icon right">
                             <ion-icon name="checkmark-circle"></ion-icon>
                         </span>
                     )
@@ -29,24 +29,24 @@ export default function Footer(props) {
             })}
         </div></>
 
-    const finalMessage = statusList.includes("u-wrong") ? <>
-        <div className="o-footer__title">
-            <img className="o-footer__title-icon" src="./assets/images/sad.png" alt="" />
-            <p className="o-footer__title-text">
+    const finalMessage = statusList.includes("wrong") ? <>
+        <div className="footer__title">
+            <img className="footer__title-icon" src="./assets/images/sad.png" alt="" />
+            <p className="footer__title-text">
                 Putz...
             </p>
         </div>
-        <p className="o-footer__main-message">
+        <p className="footer__main-message">
             Ainda faltam alguns...Mas não desanime!
         </p>
     </> : <>
-        <div className="o-footer__title">
-            <img className="o-footer__title-icon" src="./assets/images/party.png" alt="" />
-            <p className="o-footer__title-text">
+        <div className="footer__title">
+            <img className="footer__title-icon" src="./assets/images/party.png" alt="" />
+            <p className="footer__title-text">
                 PARABÉNS!
             </p>
         </div>
-        <p className="o-footer__main-message">
+        <p className="footer__main-message">
             Você não esqueceu de nenhum flashcard!
         </p>
     </>
@@ -55,11 +55,11 @@ export default function Footer(props) {
     // TODO CHANGE "u-" from statusList to better logic understanding
 
     return (
-        <footer className="o-footer">
+        <footer className="footer">
 
             {totalAnswered === questions.length && finalMessage}
 
-            <p className="o-footer__card-counter">
+            <p className="footer__card-counter">
                 {totalAnswered}/{questions.length} CONCLUÍDOS
             </p>
 

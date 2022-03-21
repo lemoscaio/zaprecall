@@ -11,6 +11,16 @@ export default function Card(props) {
     const isOpenedCSS = isOpened ? "is-opened" : ""
     const isTurnedCSS = isTurned ? "turned" : ""
 
+    let statusIcon
+    if (!status) {
+        statusIcon = "play-outline"
+    } else if (status === "wrong") {
+        statusIcon = "close-circle"
+    } else if (status === "almost-wrong") {
+        statusIcon = "help-circle"
+    } else if (status === "right") {
+        statusIcon = "checkmark-circle"
+    }
 
 
     // TODO make some way to close the card wihtout needing to answer again
@@ -28,49 +38,47 @@ export default function Card(props) {
 
     const frontFaceContent = !isOpened ?
         <>
-            <p className="c-card__number">
+            <p className="card__number">
                 Pergunta {index + 1}
             </p >
-            <span className="c-card__icon">
-                <ion-icon name="play-outline"></ion-icon>
+            <span className="card__icon">
+                <ion-icon name={statusIcon}></ion-icon>
             </span>
         </> :
         <>
-            <h2 className="c-card__question">
+            <h2 className="card__question">
                 {question}
             </h2>
-            <img onClick={() => { setIsTurned(true) }} className="c-card__turn-icon" src="./assets/images/turn-arrow.png" alt="Seta em 360 graus" />
+            <img onClick={() => { setIsTurned(true) }} className="card__turn-icon" src="./assets/images/turn-arrow.png" alt="Seta em 360 graus" />
         </>
 
     const backFaceContent = isTurned ?
         <>
             <h2
-                className="c-card__question">
+                className="card__question">
                 {answer}
             </h2>
-            <div className="c-card__buttons">
+            <div className="card__buttons">
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "u-wrong")
-                }} className=" c-card__button c-card__button--wrong">Não lembrei</button>
+                    setAndStoreStatus(event, "wrong")
+                }} className=" card__button card__button--wrong">Não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "u-almost-wrong")
-                }} className=" c-card__button c-card__button--almost-wrong">Quase não lembrei</button>
+                    setAndStoreStatus(event, "almost-wrong")
+                }} className=" card__button card__button--almost-wrong">Quase não lembrei</button>
                 <button onClick={(event) => {
-                    setAndStoreStatus(event, "u-right")
-                }} className=" c-card__button c-card__button--right">Zap!</button>
+                    setAndStoreStatus(event, "right")
+                }} className=" card__button card__button--right">Zap!</button>
             </div>
         </> : ""
 
     return (
-        <li className="c-card-list__item">
-            <article onClick={() => setIsOpened(true)} className={`c-card-list__card c-card ${isOpenedCSS} ${isTurnedCSS} ${status}`}>
-                <div className="c-card__face c-card__face--front">
-                    {frontFaceContent}
-                </div>
-                <div className="c-card__face c-card__face--back">
-                    {backFaceContent}
-                </div>
-            </article>
-        </li>
+        <article onClick={() => setIsOpened(true)} className={`cards__card card ${isOpenedCSS} ${isTurnedCSS} ${status}`}>
+            <div className="card__face card__face--front">
+                {frontFaceContent}
+            </div>
+            <div className="card__face card__face--back">
+                {backFaceContent}
+            </div>
+        </article>
     )
 }

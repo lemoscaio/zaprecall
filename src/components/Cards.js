@@ -3,8 +3,8 @@ import Card from "./Card.js";
 export default function Cards({ questions, setTotalAnswered, setStatusList }) {
 
     return (
-        <main className="o-main">
-            <ul className="c-card-list">
+        <main className="main">
+            <div className="main__cards cards">
                 {questions.map((question, index) => {
                     return <Card
                         question={question}
@@ -13,7 +13,7 @@ export default function Cards({ questions, setTotalAnswered, setStatusList }) {
                         setStatusList={setStatusList}
                     />
                 })}
-            </ul>
+            </div>
         </main>
     )
 }
