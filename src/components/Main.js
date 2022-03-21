@@ -21,7 +21,7 @@ export default function Main({ homeScreen, setHomeScreen, images, checkScroll })
 
     function checkScroll() {
         const headerEl = document.querySelector(".main")
-        return headerEl.scrollTop > 0 ? setscrollClassCSS(["active"]) : setscrollClassCSS([""])
+        return headerEl.scrollTop > 0 ? setscrollClassCSS(["scrolled"]) : setscrollClassCSS([""])
     }
 
     return (

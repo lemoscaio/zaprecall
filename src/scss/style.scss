@@ -145,9 +145,7 @@ button {
 
 // header
 
-.header.active {
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);   
-}
+
 
 .header {
     position: sticky;
@@ -160,6 +158,12 @@ button {
     height: 100px;
 
     background-color: $background-color;
+    
+    transition: all 0.5s;
+
+    &.scrolled {
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);   
+    }
 
     &__icon {
         width: 50px;
