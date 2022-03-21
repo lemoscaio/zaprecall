@@ -70,6 +70,10 @@ body {
     background-color: $background-color;
 }
 
+button {
+    @extend %default-font;
+}
+
 // utilitaries
 
 .wrong {
