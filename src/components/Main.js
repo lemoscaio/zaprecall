@@ -4,6 +4,7 @@ import Header from "./Header.js";
 import Cards from "./Cards.js";
 import Footer from "./Footer.js";
 
+// TODO make questions come from JSON file
 const questions = [
     {
         question: "O que é JSX?",
@@ -60,16 +61,18 @@ export default function Main() {
     const [totalAnswered, setTotalAnswered] = React.useState(0)
     const [statusList, setStatusList] = React.useState([])
 
+    const shuffledQuestions = questions.sort(() => Math.random() - 0.5)
+
     return (
         <>
             <Header />
             <Cards
-                questions={questions}
+                questions={shuffledQuestions}
                 setTotalAnswered={() => setTotalAnswered(totalAnswered + 1)}
                 setStatusList={(status) => setStatusList([...statusList, status])}
             />
             <Footer
-                questions={questions}
+                questions={shuffledQuestions}
                 totalAnswered={totalAnswered}
                 statusList={statusList}
             />
