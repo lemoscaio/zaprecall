@@ -307,7 +307,6 @@ button {
 
         &__buttons {
             display: flex;
-            align-items: center;
             justify-content: space-evenly;
             position: absolute;
             bottom: 0;
@@ -317,13 +316,16 @@ button {
         }
 
         &__button {
+            flex-basis: calc(100%/3);
             flex-grow: 1;
-            flex-shrink: 0;
+            flex-shrink: 1;
 
             @extend %default-font;
 
             padding: 10px;
             margin: 0 5px;
+
+            font-size: 12px;
 
             cursor: pointer;
 
