@@ -307,6 +307,10 @@ button {
 
         &__buttons {
             display: flex;
+            @include desktop-only {
+                align-items: center;
+                
+            };
             justify-content: space-evenly;
             position: absolute;
             bottom: 0;
@@ -320,9 +324,13 @@ button {
             flex-grow: 1;
             flex-shrink: 1;
 
+            @include desktop-only {
+                padding: 10px;
+            };
+
             @extend %default-font;
 
-            padding: 10px;
+            padding: 5px 10px;
             margin: 0 5px;
 
             font-size: 12px;
