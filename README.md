@@ -3,7 +3,7 @@
 <h2 align=center>Zaprecall</h2>
 <h3 align=center>Web development Project</h3>
 <hr>
-<h4>A flashcard web-app made with React.JS. This was the seventh project of the Driven full stack web development bootcamp and the first to use React.JS.</h4>
+<h4 align=center>A flashcard web-app made with React.JS. This was the eighth project of the Driven full stack web development bootcamp.</h4>
 <br>
 <div align=center style="display:flex; justify-content: center; gap:5%">
     <img style = "height:250px;"src="https://i.imgur.com/uzQ81f9.png">
